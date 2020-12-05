@@ -28,7 +28,7 @@ vector<int> bfs(al& graph, int n, int s, int t) {
   ans.push_back(-1); // Placeholder for min value
   vector<int> parent(n);
   queue<int> bfsq;
-  // Parent of source will be set as -2, if not cisited -1
+  // Parent of source will be set as -2, if not visited -1
   for (int i=0; i<n; i++) parent[i] = -1;
   parent[s] = -2;
   bfsq.push(s);
@@ -172,6 +172,7 @@ int bipartite_matching(al& graph, int n, vector<int>& partition) {
   al rgraph;
   int maxmatching = find_max_flow(flowgraph, n + 2, s, t, rgraph);
   vector<pair<int, int> > matchings;
+  // This is also the basic idea of min cut algorithms
   for (int i=1; i<n+1; i++) {
     for (int j=1; j<n+1; j++) {
       if (!rgraph[i][j] && flowgraph[i][j]) {

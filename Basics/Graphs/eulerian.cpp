@@ -1,4 +1,4 @@
-# include <iostream>
+  # include <iostream>
 # include <unordered_map>
 # include <queue>
 # include <stack>
@@ -51,13 +51,14 @@ bool path_rec(al& graph, int node, deque<int>& cycle, bool destFound) {
   if (graph[node].size() == 0) {
     if (cycle.size() == 0) return true; // Means all edges are visited
     if (node == cycle.front()) { // When the path return backs to init node, when there are no out edges it can be thought of as a cycle back to itself with no intermeidate nodes
-      cout<<cycle.front()<<' ';
-      cycle.pop_front();
-      return path_rec(graph, cycle.front(), cycle, destFound);
+      cout<<cycle.back()<<' ';
+      cycle.pop_back(); // backtracking to the previous node
+      return path_rec(graph, cycle.back(), cycle, destFound);
     } else {
       if (!destFound) {
+        // The first time we are stuck that might be the destination node with the extra in edge
         destFound = true;
-        return path_rec(graph, cycle.front(), cycle, destFound); // Only extra piece of code for path, for the first iteration find a path from dource to dest which is the first node which runs out of edges. Then start the algo from source again
+        return path_rec(graph, cycle.back(), cycle, destFound); // Only extra piece of code for path, for the first iteration find a path from dource to dest which is the first node which runs out of edges. Then start the algo from source again
       }
       return false; // Means it is stuck so not an eulerian graph
     }
@@ -75,7 +76,7 @@ void eulerian_path(al& graph, int source, int n) {
     graphcopy[i] = graph[i];
   }
   deque<int> cycle;
-  cycle.push_back(0);
+  cycle.push_back(source);
   if (!path_rec(graphcopy, source, cycle, false)) {
     cout<<"No eulerian path from source";
   }
@@ -94,8 +95,8 @@ bool cycle_rec(al& graph, int node, deque<int>& cycle) {
   if (graph[node].size() == 0) {
     if (cycle.size() == 0) return true;
     if (node == cycle.front()) {
-      cout<<cycle.front()<<' ';
-      cycle.pop_front();
+      cout<<cycle.back()<<' ';
+      cycle.pop_back();
       return cycle_rec(graph, cycle.front(), cycle);
     } else {
       return false;

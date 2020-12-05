@@ -42,10 +42,10 @@ void bfs(al& graph, int n) { // Does not matter if directed or undirected algori
   queue<int> bfsq;
   vector<bool> visited(n);
   if (n == 0) return;
-  visited[0] = true;
+  //visited[0] = true;
   for (int i=0; i<n; i++) {
     if (!visited[i]) {
-      bfsq.push(0);
+      bfsq.push(i);
       while (bfsq.size() > 0) {
         int node = bfsq.front ();
         cout<<node<<' ';
@@ -77,6 +77,7 @@ void dfs(al& graph, int n) {
     vector<bool> visited(n);
     for (int i=0; i<n; i++) {
       if (!visited[i])
+        //visited[node] = true;
         dfs_rec(graph, 0, visited);
     }
     cout<<'\n';

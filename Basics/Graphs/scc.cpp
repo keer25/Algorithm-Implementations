@@ -28,6 +28,7 @@ void scc_rec(al& graph, int node, vector<bool>& visited, vector<int>& dist, vect
   visited[node] = true;
   scc.push(node);
   low[node] = dist[node]; // Important! Initially it is just the node itself
+//  dist[node] = dist[node] + 1;
 
   for (int i=0; i<graph[node].size(); i++) {
     int child = graph[node][i];
